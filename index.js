@@ -1,17 +1,20 @@
 let btn = document.querySelector(".btn");
-
 let usernamepatren = /^\S+$/;
 let passwordpatren = /^(?=.*\d).{8,}$/;
 let phonepatren = /^07\d{8}$/;
 
-function validateInput(username, password, phone) {
-  return {
-    username: usernamepatren.test(username),
-    password: passwordpatren.test(password),
-    phone: phonepatren.test(phone)
+function vaildinput(username, password, phone) {
+   let userva=usernamepatren.test(username);
+    let passva= passwordpatren.test(password);
+    let phoneva= phonepatren.test(phone);
+  console.log("validname"+userva);
+    console.log("validpass"+passva);
+  console.log("vaildnum"+phoneva);
+
+    return {
+    userva,passva,phoneva
   };
 }
-
 btn.onclick = function () {
   let username = document.getElementById("text").value;
   let password = document.getElementById("password").value;
@@ -20,11 +23,13 @@ btn.onclick = function () {
 let session=sessionStorage.setItem("username",JSON.stringify(username));
 let local=localStorage.setItem("order",JSON.stringify(order));
     
-  let result = validateInput(username, password, phone);
-
-  if (result.username && result.password && result.phone) {
+let result = vaildinput(username, password, phone);
+  if (result.userva &&result.passva && result.phoneva) 
+    {
     document.write("Hello " + username + " Your Order is " + order);
-  } else {
+    }
+  else
+  {
     alert("Enter valid inputs");
   }
 };
